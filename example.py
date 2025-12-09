@@ -23,8 +23,6 @@ students = [
 def home():
     return "<h1>Welcome to the Student API</h1><p>Go to <a href='/students'>/students</a> for the data.</p>", 200
 
-def get_students():
-    return jsonify(students)
 # /old_students/: Returns an array of student objects where the students are older than 20 years old
 @app.route('/students/old_students', methods=['GET'])
 def get_old_students():
@@ -79,12 +77,13 @@ def student_ages():
         student_ages.append(student['first_name'])
         student_ages.append(student['last_name'])
     if student_ages:
-        return jsonify(student_ages)
+        return jsonify(student_names, student_ages)
     else: 
         return "There are no students", 404
 
 # /students/: Returns an array of all student objects available.
-
+def get_students():
+    return jsonify(students)
 
 if __name__ == '__main__':
     app.run(debug=True) 
